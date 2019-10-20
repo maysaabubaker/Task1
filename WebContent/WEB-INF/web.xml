@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>task1</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  <servlet-name>Login</servlet-name>
+  <servlet-class>com.controller.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Login</servlet-name>
+  <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+   <servlet-name>Developer Home</servlet-name>
+  <servlet-class>com.controller.DeveloperServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Developer Home</servlet-name>
+  <url-pattern>/dhome</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>Add Task</servlet-name>
+  <servlet-class>com.controller.addTask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Add Task</servlet-name>
+  <url-pattern>/addtask</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>change status</servlet-name>
+  <servlet-class>com.controller.changeStatus</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>change status</servlet-name>
+  <url-pattern>/changeStatus</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>logout</servlet-name>
+  <servlet-class>com.controller.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>logout</servlet-name>
+  <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>profile</servlet-name>
+  <servlet-class>com.controller.ProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>profile</servlet-name>
+  <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  <servlet-name>Manager Home</servlet-name>
+  <servlet-class>com.controller.ManagerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Manager Home</servlet-name>
+  <url-pattern>/mhome</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  <servlet-name>Leader Home</servlet-name>
+  <servlet-class>com.controller.LeaderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Leader Home</servlet-name>
+  <url-pattern>/lhome</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  <servlet-name>View Task</servlet-name>
+  <servlet-class>com.controller.ViewTask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>View Task</servlet-name>
+  <url-pattern>/vtask</url-pattern>
+  </servlet-mapping>
+  
+     <servlet>
+  <servlet-name>Assign Task</servlet-name>
+  <servlet-class>com.controller.AssignTask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Assign Task</servlet-name>
+  <url-pattern>/astask</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>Accept Task</servlet-name>
+  <servlet-class>com.controller.AcceptTask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Accept Task</servlet-name>
+  <url-pattern>/atask</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>Reject Task</servlet-name>
+  <servlet-class>com.controller.RejectTask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Reject Task</servlet-name>
+  <url-pattern>/rtask</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>Add employee</servlet-name>
+  <servlet-class>com.controller.AddEmp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Add employee</servlet-name>
+  <url-pattern>/newemp</url-pattern>
+  </servlet-mapping>
+</web-app>
