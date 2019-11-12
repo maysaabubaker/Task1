@@ -19,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.DatabaseConnection;
-import com.model.TaskRecord;
+import com.model.*;
+
 
 /**
  * Servlet implementation class ManagerServlet
@@ -45,53 +46,54 @@ public class ManagerServlet extends HttpServlet {
 	PrintWriter out=response.getWriter();
 				
 		Connection con=DatabaseConnection.getConnection();
-		ArrayList<HashMap<String,String>> developers=new ArrayList<HashMap<String,String>>();
-		ArrayList<HashMap<String,String>> leaders=new ArrayList<HashMap<String,String>>();
+		ArrayList<Task> tasks=new ArrayList<Task>();
+		ArrayList<Person> developers=new ArrayList<Person>();
+		ArrayList<Person> leaders=new ArrayList<Person>();
+
 
 		try {
-			ArrayList tasks=new ArrayList();
 			PreparedStatement ps=con.prepareStatement("select * from tasks where aid=?");
 			ps.setInt(1,pid);
 			ResultSet result1=ps.executeQuery();
-			TaskRecord tr=new TaskRecord();
-		   tasks=tr.getTasks(result1);
+			while(result1.next())
+			{
+			int tid=result1.getInt(1);		
+			String title=result1.getString(2);
+			String summary=result1.getString(3);
+			String status=result1.getString(4);
+			Task t=new Task(tid,title,summary,status);
+	        tasks.add(t);
+			}
            request.setAttribute("userTasks", tasks);
 			
 		    Statement stm=con.createStatement();
 			ResultSet result=stm.executeQuery("select fname,lname,level,id,lid"
 			+ " from person where level=2 or level=3");
 			while(result.next())
-			{
-				HashMap<String,String> map=new HashMap<String,String>();	
-			
-			map.put("name", result.getString(1)+" "+result.getString(2));
-			
-			map.put("id", result.getString(4));	
-
+			{String name=result.getString(1)+" "+result.getString(2);
+			int id=Integer.parseInt(result.getString(4));
 			int level=result.getInt(3);
-
 			int lid=result.getInt(5);
 
 			PreparedStatement ps2=con.prepareStatement("select fname,lname from person where id=?");
 			ps2.setInt(1,lid);
 			ResultSet result2=ps2.executeQuery();
-			String lname = null;
+			String lname = "";
 			if (result2.next()) {
 			lname=result2.getString(1)+" "+result2.getString(2);
 			}
-			map.put("lname", lname);	
+			Person p=new Person(id,name,level,lname);
+
 
 			if(level==2) {
-			leaders.add(map);	
+			leaders.add(p);	
 			}
 			else {
-			developers.add(map);	
+			developers.add(p);	
 			}
 			}
             request.setAttribute("leaders", leaders);
             request.setAttribute("developers", developers);
-
-            
 			  
 
 		} catch (Exception e) {

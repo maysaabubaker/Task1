@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="login.css" type="text/css">
+
 <meta charset="ISO-8859-1">
 <title>Login</title>
 </head>
 <body>
-<form method="post" action="login" >
-<h1>Login</h1>
-Username:<input type="text" name="username"/><br/><br/>
-Password:<input type="password" name="pass"/><br/>
-<input type="submit" value="LogIn"/>
-</form>
+<div class="login-page">
+  <div class="form">
+
+    <form class="login-form"  method="post" action="login">
+      <input type="text" placeholder="username"  name="username"/>
+      <input type="password" placeholder="password" name="pass"/>
+      <button>login</button>
+    </form>
+  </div>
+</div>
 </body>
-</html>

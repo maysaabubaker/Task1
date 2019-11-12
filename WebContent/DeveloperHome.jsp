@@ -6,17 +6,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="/task1/home.css" type="text/css">
-<link rel="stylesheet" href="/task1/header.css" type="text/css">
-<link rel="stylesheet" href="/task1/sidebar.css" type="text/css">
-
+<link rel="stylesheet" href="home.css" type="text/css">
+<script type="text/javascript" src="sort-table.js"></script>
 
 <title>Developer Home</title>
 </head>
 <body>
-
-<h1>User Tasks</h1>
-<table border=1>
+<jsp:include page="header.jsp"/>
+<div class="card">
+<div class="content">
+<h1>Developer Tasks</h1>
+<table border=1 class="js-sort-table">
 <tr><th>Task Id</th>
 <th>Title</th>
 <th>Summary</th>
@@ -35,22 +35,22 @@
 action="changeStatus">
 <c:choose>
 <c:when test="${task.status=='in progress'}">
+<input type=radio name=cstat  value="to do"/> to do<br>
 <input type=radio name=cstat checked value="in progress"/> in progress<br>
-<input type=radio name=cstat  value="done"/> done<br>
 <input type=radio name=cstat  value="completed"/>completed<br>
 </c:when>
-<c:when test="${task.status=='done'}">
+<c:when test="${task.status=='to do'}">
+<input type=radio name=cstat checked value="to do"/> to do<br>
 <input type=radio name=cstat  value="in progress"/> in progress<br>
-<input type=radio name=cstat checked value="done"/> done<br>
 <input type=radio name=cstat  value="completed"/>completed<br></c:when>
 <c:when test="${task.status=='completed'}">
+<input type=radio name=cstat  value="to do"/> to do<br>
 <input type=radio name=cstat  value="in progress"/> in progress<br>
-<input type=radio name=cstat  value="done"/> done<br>
 <input type=radio name=cstat  checked value="completed"/>completed<br>
 </c:when>
 <c:otherwise>
+<input type=radio name=cstat  value="to do"/> to do<br>
 <input type=radio name=cstat  value="in progress"/> in progress<br>
-<input type=radio name=cstat  value="done"/> done<br>
 <input type=radio name=cstat  value="completed"/>completed<br>
 </c:otherwise>
 </c:choose>
@@ -68,7 +68,7 @@ action="changeStatus">
 </c:forEach>
 </table>
 <h1>Pending Tasks</h1>
-<table border=1>
+<table border=1 class="js-sort-table">
 <tr><th>Task Id</th>
 <th>Title</th>
 <th>Summary</th>
@@ -83,11 +83,7 @@ action="changeStatus">
 </tr>
 </c:if></c:forEach>
 </table>
-<br>
-<button onclick="location.href = 'addTask.html';">Add Task</button>
-<button onclick="location.href = 'logout';">Logout</button>
-<button onclick="location.href = 'profile';">View Profile</button>
-
-
+</div>
+</div>
 </body>
 </html>

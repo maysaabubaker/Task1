@@ -6,12 +6,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="home.css" type="text/css">
+<script type="text/javascript" src="sort-table.js"></script>
 <title>Manager Home</title>
 </head>
 <body>
-Hi ${username}<br>
+<jsp:include page="header.jsp"/>
+
+<div class="card">
+<div class="content">
 <h1>Manager Tasks</h1>
-<table border=1>
+<table border=1 class="js-sort-table">
 <tr><th>Task Id</th>
 <th>Title</th>
 <th>Summary</th>
@@ -30,22 +35,22 @@ Hi ${username}<br>
 action="changeStatus">
 <c:choose>
 <c:when test="${task.status=='in progress'}">
+<input type=radio name=cstat  value="to do"/> to do<br>
 <input type=radio name=cstat checked value="in progress"/> in progress<br>
-<input type=radio name=cstat  value="done"/> done<br>
 <input type=radio name=cstat  value="completed"/>completed<br>
 </c:when>
-<c:when test="${task.status=='done'}">
+<c:when test="${task.status=='to do'}">
+<input type=radio name=cstat checked value="to do"/> to do<br>
 <input type=radio name=cstat  value="in progress"/> in progress<br>
-<input type=radio name=cstat checked value="done"/> done<br>
 <input type=radio name=cstat  value="completed"/>completed<br></c:when>
 <c:when test="${task.status=='completed'}">
+<input type=radio name=cstat  value="to do"/> to do<br>
 <input type=radio name=cstat  value="in progress"/> in progress<br>
-<input type=radio name=cstat  value="done"/> done<br>
 <input type=radio name=cstat  checked value="completed"/>completed<br>
 </c:when>
 <c:otherwise>
+<input type=radio name=cstat  value="to do"/> to do<br>
 <input type=radio name=cstat  value="in progress"/> in progress<br>
-<input type=radio name=cstat  value="done"/> done<br>
 <input type=radio name=cstat  value="completed"/>completed<br>
 </c:otherwise>
 </c:choose>
@@ -64,7 +69,7 @@ action="changeStatus">
 </table>
 <br>
 <h1>Team Leaders</h1>
-<table border=1>
+<table border=1 class="js-sort-table">
 <tr>
 <th>Name</th>
 <th>Tasks</th>
@@ -75,14 +80,14 @@ action="changeStatus">
 <td>${leader.name}</td>
 <td>
 <form action="vtask" method="post">
-<button name="pid"  value="${leader.id}">View Tasks</button>
+<button name="pid"  id="myBtn" value="${leader.id}">View Tasks</button>
 </form>
 </td>
 </tr>
 </c:forEach>
 </table>
 <h1>Developers</h1>
-<table border=1>
+<table border=1 class="js-sort-table">
 <tr>
 <th>Name</th>
 <th>Leader Name</th>
@@ -92,11 +97,11 @@ action="changeStatus">
 <tr>
 <tr>
 <td>${developer.name}</td>
-<td>${developer.lname}</td>
+<td>${developer.lename}</td>
 
 <td>
 <form action="vtask" method="post">
-<button name="pid"  value="${developer.id}">View Tasks</button>
+<button name="pid" id="myBtn" value="${developer.id}">View Tasks</button>
 </form>
 </td>
 
@@ -105,8 +110,13 @@ action="changeStatus">
 </c:forEach>
 </table>
 <br><br>
-<c:if test="${empty vtask}">
-<table border=1>
+<c:if test="${not empty vtasks}">
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+<table border=1 class="js-sort-table">
 <tr><th>Task Id</th>
 <th>Title</th>
 <th>Summary</th>
@@ -124,7 +134,7 @@ ${task.status}
 </c:when>
 <c:when test="${task.status=='waiting manager'}">
 <form action="atask" method="post">
-<button name="accept"  value="${task.tid}">accept</button></form>
+<button name="accept"  value="${task.tid}">accept</button></form><br>
 <form action="rtask" method="post">
 <button name="reject"  value="${task.tid}">reject</button>
 </form>
@@ -134,14 +144,40 @@ ${task.status}
 </tr>
 </c:forEach>
 </table>
+</div>
+</div>
 </c:if>
 <br>
-<form action="AddEmp.html" method="post">
-<button name="submit">Add new employee</button>
-</form>
-<button onclick="location.href = 'addTask.html';">Add Task</button>
-<button onclick="location.href = 'logout';">Logout</button>
-<button onclick="location.href = 'profile';">View Profile</button>
+
+</div>
+</div>
 
 </body>
+<script type="text/javascript">
+//Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 </html>

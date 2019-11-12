@@ -42,7 +42,7 @@ public class AssignTask extends HttpServlet {
 		PrintWriter out =response.getWriter();
 
 		try {
-			PreparedStatement ps=con.prepareStatement("insert into tasks(title,summary,aid,status,lid) values(?,?,?,'in progress',?)");
+			PreparedStatement ps=con.prepareStatement("insert into tasks(title,summary,aid,status,lid) values(?,?,?,'to do',?)");
 			ps.setString(1,title);
 			ps.setString(2, summary);
 			ps.setInt(3, aid);

@@ -40,7 +40,7 @@ public class AcceptTask extends HttpServlet {
 
 	Connection con=DatabaseConnection.getConnection();
 	try {
-		PreparedStatement ps=con.prepareStatement("update tasks set status=\"in progress\" , lid=? where tid=?");
+		PreparedStatement ps=con.prepareStatement("update tasks set status=\"to do\" , lid=? where tid=?");
 		ps.setInt(1,pid);
 		ps.setInt(2,tid);
 		ps.executeUpdate();

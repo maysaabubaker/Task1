@@ -7,45 +7,29 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="home.css" type="text/css">
-<title>User Profile</title>
+<style>
+table td, table th {border: none;}
+</style>
+<title>Add Task</title>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 <div class="card">
 <div class="content">
-<h1>Personal Information</h1>
+<h1>Add task</h1>
+<form action="addtask" method="post">
 <table>
-<tr>
-<td>First Name:</td>
-<td>${person.fname}</td>
+<tr><td>
+Title:</td><td> <input type="text" name="title"/></td>
 </tr>
-
-<tr>
-<td>Last Name:</td>
-<td>${person.lname}</td>
+<tr><td>
+Summary:</td><td><textarea name="summary" ></textarea></td>
 </tr>
-
-<tr>
-<td>Address</td>
-<td>${person.address}</td>
-</tr>
-
-<tr>
-<td>Email</td>
-<td>${person.email}</td>
-</tr>
-
-<tr>
-<td>Phone Number</td>
-<td>${person.phonenumber}</td>
-</tr>
-
-<tr>
-<td>Level</td>
-<td>${person.level}</td>
-</tr>
-
+<tr><td></td><td>
+<button type="submit">Add Task</button> 
+</td></tr>
 </table>
+</form>
 </div>
 </div>
 </body>

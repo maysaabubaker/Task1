@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.DatabaseConnection;
-import com.model.TaskRecord;
+import com.model.Task;
 
 /**
  * Servlet implementation class ViewTask
@@ -43,16 +43,24 @@ public class ViewTask extends HttpServlet {
 	PrintWriter out=response.getWriter();
 				
 		Connection con=DatabaseConnection.getConnection();
-		ArrayList tasks=new ArrayList();
+		ArrayList<Task> tasks=new ArrayList<Task>();
 		try {
 			PreparedStatement ps=con.prepareStatement("select * from tasks where aid=?");
 			ps.setInt(1,pid);
 			ResultSet result=ps.executeQuery();
-			TaskRecord tr=new TaskRecord();
-		tasks=tr.getTasks(result);
+			while(result.next())
+			{
+			int tid=result.getInt(1);		
+			String title=result.getString(2);
+			String summary=result.getString(3);
+			String status=result.getString(4);
+			Task t=new Task(tid,title,summary,status);
+	        tasks.add(t);
+			}
             request.setAttribute("vtasks", tasks);
             
            
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
